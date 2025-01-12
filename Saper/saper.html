@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <script src="saper.js" defer></script>
+
+    <!-- Styl zrobiony z chatemgpt jak cos -->
+    <style>
+        /* Ogólne */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #FCE38A, #F38181);
+            color: #444;
+        }
+
+        /* Kontener główny */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        /* Plansza gry */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 50px);
+            justify-content: center;
+            gap: 5px;
+            margin-top: 20px;
+            overflow: auto;
+            /* Umożliwia przewijanie */
+            max-height: 70vh;
+            /* Maksymalna wysokość planszy */
+            border: 2px solid #ddd;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* przewijanie boddy */
+        html {
+            overflow-y: auto;
+        }
+
+        /* Nagłówek */
+        h1 {
+            margin: 0;
+            font-size: 48px;
+            color: #F38181;
+            text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.7);
+        }
+
+        /* form startowy */
+        .rows-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .inp {
+            width: 60px;
+            height: 50px;
+            font-size: 24px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        #generate,
+        #chk_leader {
+            padding: 15px 30px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #6A0572, #AB83A1);
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        #generate:hover,
+        #chk_leader:hover {
+            background: linear-gradient(135deg, #8E44AD, #C39BD3);
+            transform: scale(1.05);
+        }
+
+        /* Plansza gry */
+        .cell {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #E8F6F3;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-size: 18px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .cell:hover {
+            background: #D1F2EB;
+            transform: scale(1.1);
+        }
+
+        .cell.safe {
+            background: #AED6F1;
+            color: #1B4F72;
+        }
+
+        .cell.mine {
+            background: #F1948A;
+            color: #641E16;
+        }
+
+        .cell.flagged {
+            background: #F9E79F;
+            color: #7D6608;
+        }
+
+        /* Leaderboard */
+        .leaderboard {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 250px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            z-index: 1000;
+        }
+
+        .leaderboard h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #444;
+        }
+
+        .leaderboard p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        /* Ekran końcowy */
+        .lose {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            padding: 30px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #FFD3B6, #FFAAA5);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .wintxt,
+        .timtxt {
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background: white;
+            color: #444;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nameInput {
+            width: 90%;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 18px;
+            background: #FAFAFA;
+        }
+
+        .continue {
+            padding: 15px 30px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #6A0572, #AB83A1);
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .continue:hover {
+            background: linear-gradient(135deg, #8E44AD, #C39BD3);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+</body>
+
+</html>

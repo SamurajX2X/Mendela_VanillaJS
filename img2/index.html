@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <div class="sliderCont">
+    <button  class="left" onclick="game.slideLeft()"><</button>
+    <div class="slider">
+      <div class="cont">
+        <div class="cat cat1"></div>
+        <div class="cat cat2"></div>
+        <div class="cat cat3"></div>
+        <div class="cat cat1"></div>
+      </div>
+    </div>
+    <button class="right" onclick="game.slideRight()">></button>
+  </div>
+  <nav>
+    <button onclick="game.generate(3)">3x3</button>
+    <button onclick="game.generate(4)">4x4</button>
+    <button onclick="game.generate(5)">5x5</button>
+    <button onclick="game.generate(6)">6x6</button>
+  </nav>
+  <div class="time">
+    <div class="h1 timeCell"></div>
+    <div class="h2 timeCell"></div>
+    <div class="c timeCell"></div>
+    <div class="m1 timeCell"></div>
+    <div class="m2 timeCell"></div>
+    <div class="c timeCell"></div>
+    <div class="s1 timeCell"></div>
+    <div class="s2 timeCell"></div>
+    <div class="d timeCell"></div>
+    <div class="ms1 timeCell"></div>
+    <div class="ms2 timeCell"></div>
+    <div class="ms3 timeCell"></div>
+  </div>
+  <div class="main">
+    <div id="pf"></div>
+    <div class="leaderboard"></div>
+  </div>
+
+  <div class="winalert">
+    <h2>Gratulacje!</h2>
+    <p>Ułożenie zajęło ci: <span class="wintime"></span></p>
+    <button onclick="game.closeWinAlert()">Close</button>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gra Puzzle</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #puzzle-container {
+            display: grid;
+            gap: 1px;
+            /* Odstęp między kafelkami */
+            background-color: white;
+        }
+
+        .tile {
+            background-image: url('stalker.png');
+            /* Obraz kafelków */
+            background-size: 300px 300px;
+            /* Dopasowanie obrazu do całej siatki */
+            background-repeat: no-repeat;
+            /* Brak powtarzania obrazu */
+            border: 1px solid white;
+            width: 100%;
+            /* Automatyczne dopasowanie do siatki */
+            height: 100%;
+            /* Automatyczne dopasowanie do siatki */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="puzzle-container"></div>
+
+    <script>
+        const container = document.getElementById('puzzle-container');
+        const gridSize = 3; // Rozmiar siatki (3x3, 4x4, itd.)
+        const imageSize = 300; // Rozmiar obrazu (np. 300x300 px)
+
+        // Ustawienia kontenera
+        container.style.width = `${imageSize}px`;
+        container.style.height = `${imageSize}px`;
+        container.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+        container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+
+        // Tworzenie kafelków
+        for (let row = 0; row < gridSize; row++) {
+            for (let col = 0; col < gridSize; col++) {
+                const tile = document.createElement('div');
+                tile.classList.add('tile');
+
+                // Ustawianie pozycji fragmentu obrazu
+                const xOffset = col * (imageSize / gridSize);
+                const yOffset = row * (imageSize / gridSize);
+                tile.style.backgroundPosition = `-${xOffset}px -${yOffset}px`;
+
+                container.appendChild(tile);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+Szczegóły zawsze przy danym temacie! Poniżej synteza
+
+założenie: w tym projekcie wszystkie elementy tworzymy dynamicznie (nie wpisujemy ręcznie w body)
+Brak realizacji tego założenia? Projekt nie podlega ocenie!
+
+T.V [max. 2p]
+    { x} [1p] zachowanie formularza zgodnie z poniższymi wytycznymi
+    { x} [1p] dynamiczne generowanie planszy odpowiedniej wielkości i stosowną ilością bomb (wraz z tablicą w kodzie przechowującą te dane)
+T.VI [max. 3p]
+    { x} [2p]
+        pełne działanie samego sapera m.in. 
+        klikam i pisze ile bomb sąsiaduje, 
+        trafienie na bombę kończy grę i odkrywa pozostałe bomby,
+        znakowanie pola (bomba - ? - brak),
+        licznik pozostałych bomb
+    { x} [1p] zapewnienie autoodkrywania planszy gdy trafimy na "0"
+T.VII [max. 2p]
+    { x} [1p] czas + rekordy dla jednego trybu
+    { x} [1p] czas + rekordy dowolnych trybów (zaznacz też powyższy punkt)
+
+SUMA: chyba 7
